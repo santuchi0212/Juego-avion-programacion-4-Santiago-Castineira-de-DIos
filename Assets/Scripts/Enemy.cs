@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public int health = 3;
 
     [Header("Recompensas")]
-    public GameObject scrapPrefab; // La chatarra que va a soltar
+    public GameObject scrapPrefab; 
 
     [Header("Combate")]
     public GameObject bulletPrefab;
@@ -18,17 +18,15 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        // Desincroniza el primer disparo para que no todos los enemigos disparen a la vez
+    
         nextFire = Time.time + Random.Range(0f, fireRate);
     }
 
     void Update()
     {
-        // Al usar Vector3.back y Space.World, el enemigo siempre viajará 
-        // desde el fondo del escenario hacia la cámara, sin importar cómo esté rotado.
+
         transform.Translate(Vector3.back * speed * Time.deltaTime, Space.World);
 
-        // Disparo automático basado en tiempo
         if (Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
@@ -40,10 +38,8 @@ public class Enemy : MonoBehaviour
     {
         if (bulletPrefab != null)
         {
-            // Creamos la bala desde la posición del enemigo
             GameObject clonBala = Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
 
-            // EL TRUCO: Le programamos a la bala que su objetivo es el Jugador
             Projectile scriptBala = clonBala.GetComponent<Projectile>();
             if (scriptBala != null)
             {
@@ -63,12 +59,11 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        // Si tiene asignada una chatarra, la crea en la posición exacta donde murió
         if (scrapPrefab != null)
         {
             Instantiate(scrapPrefab, transform.position, scrapPrefab.transform.rotation);
         }
 
-        Destroy(gameObject); // El enemigo desaparece
+        Destroy(gameObject); 
     }
 }

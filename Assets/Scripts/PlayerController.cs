@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        // Actualizamos toda la interfaz al empezar
         UIManager ui = FindObjectOfType<UIManager>();
         if (ui != null)
         {
@@ -47,10 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         if (bulletPrefab != null)
         {
-            // Creamos la bala
             GameObject clonBala = Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
 
-            // EL TRUCO: Le programamos a la bala que su objetivo es el Enemigo
             Projectile scriptBala = clonBala.GetComponent<Projectile>();
             if (scriptBala != null)
             {
@@ -62,7 +59,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         lives -= damageAmount;
-        FindObjectOfType<UIManager>().ActualizarVidas(lives); // Actualiza la UI
+        FindObjectOfType<UIManager>().ActualizarVidas(lives); 
 
         if (lives <= 0)
         {
@@ -103,7 +100,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            TakeDamage(2); // Choque directo quita 2 vidas
+            TakeDamage(2); 
 
             Enemy enemigo = other.GetComponent<Enemy>();
             if (enemigo != null) enemigo.Die();

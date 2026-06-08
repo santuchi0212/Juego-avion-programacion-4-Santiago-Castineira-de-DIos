@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; // Obligatorio para componentes UI
-using UnityEngine.SceneManagement; // Obligatorio para reiniciar la escena
+using UnityEngine.UI; 
+using UnityEngine.SceneManagement; 
 
 public class UIManager : MonoBehaviour
 {
@@ -17,25 +17,25 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        // 1. Encendemos el menú de inicio y apagamos los de fin de juego
+
         if (panelInicio != null) panelInicio.SetActive(true);
         if (panelMejoras != null) panelMejoras.SetActive(false);
         if (panelVictoria != null) panelVictoria.SetActive(false);
         if (panelDerrota != null) panelDerrota.SetActive(false);
 
-        // 2. NUEVO: Ocultamos los textos y la barra para que NO se vean en el menú de inicio
+
         if (textoVidas != null) textoVidas.gameObject.SetActive(false);
         if (textoNivel != null) textoNivel.gameObject.SetActive(false);
         if (barraProgreso != null) barraProgreso.gameObject.SetActive(false);
 
-        Time.timeScale = 0f; // Pausa inicial
+        Time.timeScale = 0f; 
     }
 
     public void EmpezarJuego()
     {
         if (panelInicio != null) panelInicio.SetActive(false);
 
-        // NUEVO: Mostramos la interfaz de juego ahora que el jugador va a despegando
+ 
         if (textoVidas != null) textoVidas.gameObject.SetActive(true);
         if (textoNivel != null) textoNivel.gameObject.SetActive(true);
         if (barraProgreso != null) barraProgreso.gameObject.SetActive(true);
@@ -103,7 +103,7 @@ public class UIManager : MonoBehaviour
     public void VolverAlMenuInicio()
     {
         Time.timeScale = 1f;
-        // Al recargar la escena, el Start() de arriba se volverá a ejecutar y ocultará todo automáticamente
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
         if (panelDerrota != null) panelDerrota.SetActive(false);
         if (panelVictoria != null) panelVictoria.SetActive(false);
 
-        // NUEVO: Nos aseguramos de que la interfaz se vuelva a activar si le das a Reintentar directamente
+
         if (textoVidas != null) textoVidas.gameObject.SetActive(true);
         if (textoNivel != null) textoNivel.gameObject.SetActive(true);
         if (barraProgreso != null) barraProgreso.gameObject.SetActive(true);
